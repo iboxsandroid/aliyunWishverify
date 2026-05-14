@@ -12,7 +12,7 @@ mavenPublishing {
 publishing {
     publications {
         aar(MavenPublication) {
-            groupId = 'com.github.itlattice'
+            groupId = 'io.github.itlattice'
             artifactId = 'aliyunWishverify'
             version = '1.0.2'
             
