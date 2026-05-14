@@ -1,24 +1,11 @@
 // library/build.gradle
-apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'com.vanniktech.maven.publish.base'
 
-android {
-    compileSdkVersion 33
-    
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1.0.1"
-    }
-    
-    // 避免配置时间属性访问问题
-    testOptions {
-        unitTests.all {
-            // 禁用测试以加快构建
-            enabled = false
-        }
-    }
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
 }
 
 // 配置Maven发布
@@ -42,14 +29,15 @@ publishing {
                     license {
                         name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
                     }
                 }
                 
                 developers {
                     developer {
-                        id = 'iboxsandroid'
-                        name = 'iboxsandroid'
-                        email = 'your@example.com'
+                        id = 'itlattice'
+                        name = 'itlattice'
+                        email = 'itlattice@gmail.com'
                     }
                 }
                 
@@ -61,4 +49,10 @@ publishing {
             }
         }
     }
+}
+
+// 配置签名
+signing {
+    useGpgCmd()
+    sign publishing.publications.aar
 }
